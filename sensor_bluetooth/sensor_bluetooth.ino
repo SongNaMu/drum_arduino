@@ -15,17 +15,9 @@ unsigned long curTime2;
 //---------------------interrupt function---------------------------------
 void drum1(){
   curTime1 = millis();
-  
-  if((curTime1 - lastTime1) > DelayTime){
-    BTSerial.write("1");
 
-    Serial.println(PIEZO1);
-    Serial.println("********************");
-    Serial.print(lastTime1);
-    Serial.print(" : ");
-    Serial.print(millis());
-    Serial.println("");
-    
+  if((curTime1 - lastTime1) > DelayTime){
+    BTSerial.println(1);
     lastTime1 = millis();
   }
 }
@@ -33,17 +25,9 @@ void drum1(){
 void drum2(){
   //if(((millis() - lastTime) > DelayTime) ||((lastTime - millis()) >= 0)){
   curTime2 = millis();
-  
-  if((curTime2 - lastTime2) > DelayTime){
-    BTSerial.write("2");
 
-    Serial.println(PIEZO2);
-    Serial.println("                          ********************");
-    Serial.print(lastTime2);
-    Serial.print(" : ");
-    Serial.println(millis());
-    Serial.println("");
-    
+  if((curTime2 - lastTime2) > DelayTime){
+    BTSerial.println(2);
     lastTime2 = millis();
   }
 }
@@ -51,14 +35,11 @@ void drum2(){
 void setup() {
   pinMode(PIEZO1, INPUT);
   pinMode(PIEZO2, INPUT);
-  
-  Serial.begin(9600);
+
   BTSerial.begin(9600);
-  
+
   attachInterrupt(0, drum1, RISING);
   attachInterrupt(1, drum2, RISING);
 }
 //--------------------------- loop ---------------------------------------------------------
-void loop() {
-
-}
+void loop() {}
